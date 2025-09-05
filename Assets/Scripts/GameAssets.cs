@@ -23,4 +23,7 @@ public class GameAssets : MonoBehaviour
     }
 
     public Transform pfDamagePopUp;
+    public Transform pfMeleePrefab;
+    public Transform pfRangePrefab;
+    public Transform pfFighterStatsPrefab;
 }

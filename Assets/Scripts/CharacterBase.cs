@@ -52,7 +52,7 @@ public class CharacterBase : MonoBehaviour
         }
     }
 
-    public void PlayAnimAttack(Vector3 attackDir, System.Action onHit, System.Action onComplete)
+    public void PlayAnimAttack(Vector3 attackDir, string attackName, System.Action onHit, System.Action onComplete)
     {
         // Flip sprite based on attack direction
         if (mySpriteRenderer != null)
@@ -77,7 +77,7 @@ public class CharacterBase : MonoBehaviour
         // Trigger attack animation
         if (myAnimator != null)
         {
-            myAnimator.SetTrigger("Melee");
+            myAnimator.SetTrigger(attackName);
         }
     }
 

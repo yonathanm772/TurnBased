@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Wizard
   - GiantEnemy
+  - Warrior
+  - Hero
+  - Enemy
   layers:
   - Default
   - TransparentFX

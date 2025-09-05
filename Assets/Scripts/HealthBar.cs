@@ -6,7 +6,7 @@ public class HealthBar : MonoBehaviour
     private Transform bar;
     public void Setup(HealthSystem healthSystem)
     {
-       this.heatlhSystem = healthSystem;
+        this.heatlhSystem = healthSystem;
         bar = transform.Find("Bar");
         healthSystem.OnHealthChanged += HealthSystem_OnHealthChanged;
     }

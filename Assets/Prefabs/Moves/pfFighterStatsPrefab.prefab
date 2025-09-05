@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5667464072219225687
+--- !u!1 &8983183315531961274
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,43 +8,43 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7432203377110788348}
-  - component: {fileID: 8574487741933613941}
+  - component: {fileID: 5670192550564399668}
+  - component: {fileID: 406521449555188888}
   m_Layer: 0
-  m_Name: GameAssets
+  m_Name: pfFighterStatsPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7432203377110788348
+--- !u!4 &5670192550564399668
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5667464072219225687}
+  m_GameObject: {fileID: 8983183315531961274}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.02958, y: 2.77447, z: 0}
+  m_LocalPosition: {x: 0.45855, y: 0.04082, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8574487741933613941
+--- !u!114 &406521449555188888
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5667464072219225687}
+  m_GameObject: {fileID: 8983183315531961274}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cbbb9aeeaa0911499516439be0188e8, type: 3}
+  m_Script: {fileID: 11500000, guid: 17769f0f511d19340a16dbaa49f5432d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pfDamagePopUp: {fileID: 6926684031812956526, guid: 85477fced4b14cf44aab7bdfb2509fb2, type: 3}
-  pfMeleePrefab: {fileID: 390785799008686823, guid: 1d425132b3e29c545b13bd8c3c53481f, type: 3}
-  pfRangePrefab: {fileID: 5691690681567747508, guid: c40c44b56562910449a6a96631d5ffa0, type: 3}
-  pfFighterStatsPrefab: {fileID: 5670192550564399668, guid: c355f0764ac1c634d82421b58718220b, type: 3}
+  health: 1000
+  melee: 10
+  defense: 5
+  experience: 0

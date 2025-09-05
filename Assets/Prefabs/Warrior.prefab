@@ -13,9 +13,11 @@ GameObject:
   - component: {fileID: 6942279302263868577}
   - component: {fileID: 6445823967414005712}
   - component: {fileID: 8281883369736452070}
+  - component: {fileID: 3352385786731373045}
+  - component: {fileID: 5799128419649747650}
   m_Layer: 0
   m_Name: Warrior
-  m_TagString: Untagged
+  m_TagString: Hero
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -139,7 +141,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 372e47c2760241a4da9fd54f08ae5eef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pfHealthBar: {fileID: 3412740043860224462, guid: 116e1e6e4aad5214cbf62ac33847b068, type: 3}
+--- !u!114 &3352385786731373045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218711675048887840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03765a6460c58f5449b1d367733abe1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5799128419649747650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218711675048887840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17769f0f511d19340a16dbaa49f5432d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  melee: 10
+  defense: 5
+  experience: 0
 --- !u!1 &2657424311043781204
 GameObject:
   m_ObjectHideFlags: 0

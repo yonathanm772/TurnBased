@@ -62,7 +62,7 @@ public class CharacterBattle : MonoBehaviour
     {
         this.isPlayerTeam = isPlayerTeam;
         characterBase.SetDefaultFacingRight(isPlayerTeam);
-        healthSystem = new HealthSystem(100);
+        healthSystem = new HealthSystem(GameAssets.i.pfFighterStatsPrefab.GetComponent<FighterStats>().health);
         // Transform healthBarTransform = Instantiate(pfHealthBar, new Vector3(characterBase.transform.position.x - 1, -0.5f), Quaternion.identity);
         //healthBar = healthBarTransform.GetComponent<HealthBar>();
         //healthBar.Setup(healthSystem);
@@ -115,8 +115,9 @@ public class CharacterBattle : MonoBehaviour
         return healthSystem.isDead();
     }
 
-    public void Attack(CharacterBattle targetCharacterBattle, Action onAttackComplete)
+    public void Attack(CharacterBattle targetCharacterBattle,string abilityName, Action onAttackComplete)
     {
+        HideAttackButtons();
         Vector3 offsetDir = (GetPosition() - targetCharacterBattle.GetPosition()).normalized;
         Vector3 slideTargetPosition = targetCharacterBattle.GetPosition() + offsetDir * 2f;
         Vector3 originalPosition = GetPosition();
@@ -129,7 +130,7 @@ public class CharacterBattle : MonoBehaviour
             //Arrival at target, play attack animation
             state = State.Busy;
             Vector3 attackDir = (targetCharacterBattle.GetPosition() - GetPosition()).normalized;
-            characterBase.PlayAnimAttack(attackDir, () =>
+            characterBase.PlayAnimAttack(attackDir, abilityName, () =>
             {
                 int dmageAmount = UnityEngine.Random.Range(30,40);
                 // Target Hit
@@ -183,5 +184,11 @@ public class CharacterBattle : MonoBehaviour
     public void ShowSelectionCircle()
     {
         selectionCircleGameObject.SetActive(true);
+    }
+
+    private void HideAttackButtons()
+    {
+
+        AbilityButtonManager.HideStatic();
     }
 }

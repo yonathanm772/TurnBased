@@ -3,6 +3,18 @@ using UnityEngine.TextCore.Text;
 
 public class BattleHandler : MonoBehaviour
 {
+    public static BattleHandler i { get; private set; }
+
+    private void Awake()
+    {
+        if (i != null && i != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        i = this;
+        // Optional: DontDestroyOnLoad(gameObject);
+    }
     // prefab character (i.e. wizard)
     [SerializeField] private Transform pfCharacterBattle;
     [SerializeField] private Transform pfEnemyBattle;
@@ -34,21 +46,29 @@ public class BattleHandler : MonoBehaviour
     {
         if (state == BattleState.WaitingForPlayer)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            /*if (Input.GetKeyDown(KeyCode.Space))
             {
                 state = BattleState.Busy;
                 playerCharacterBattle.Attack(enemyCharacterBattle, () =>
                 {
                     ChooseNextActiveCharacter();
                 });
-            }
+            }*/
+            /*if (MakeButton.Equals("MeleeBtn"))
+            {
+                state = BattleState.Busy;
+                playerCharacterBattle.Attack(enemyCharacterBattle, () =>
+                {
+                    ChooseNextActiveCharacter();
+                });
+            }*/
         }
     }
 
     private CharacterBattle SpawnCharacter(bool isPlayerTeam)
     {
-        Vector3 heroPosition = new Vector3(-5, -2);
-        Vector3 enemyPosition = new Vector3(+5, -2);
+        Vector3 heroPosition = new Vector3(-5, 0);
+        Vector3 enemyPosition = new Vector3(+5, 0);
 
         if (isPlayerTeam)
         {
@@ -79,7 +99,7 @@ public class BattleHandler : MonoBehaviour
 
     }
 
-    private void ChooseNextActiveCharacter()
+    public void ChooseNextActiveCharacter()
     {
         if (TestBattleOver())
         {
@@ -90,7 +110,9 @@ public class BattleHandler : MonoBehaviour
             SetActiveCharacterBattle(enemyCharacterBattle);
             state = BattleState.Busy;
 
-            enemyCharacterBattle.Attack(playerCharacterBattle, () =>
+            int randomAttack = Random.Range(0, 2); // Assuming there are 2 types of attacks for the enemy
+            string abilityName = "Ability" + randomAttack;
+            enemyCharacterBattle.Attack(playerCharacterBattle, abilityName, () =>
             {
                 ChooseNextActiveCharacter();
             });
@@ -99,6 +121,7 @@ public class BattleHandler : MonoBehaviour
         {
             SetActiveCharacterBattle(playerCharacterBattle);
             state = BattleState.WaitingForPlayer;
+            ShowAttackButtons();
         }
     }
 
@@ -108,7 +131,7 @@ public class BattleHandler : MonoBehaviour
         {
             //state = BattleState.Defeat;
            //CodeMonkey.CMDebug.TextPopupMouse("Enemy Wins!");
-           BattleOverWindow.ShowStatic("Enemy Wins!");
+            BattleOverWindow.ShowStatic("Enemy Wins!");
             return true;
         }
         if (enemyCharacterBattle.IsDead())
@@ -120,5 +143,11 @@ public class BattleHandler : MonoBehaviour
         }
 
         return false;
+    }
+
+
+    private void ShowAttackButtons()
+    {
+        AbilityButtonManager.ShowStatic();
     }
 }
