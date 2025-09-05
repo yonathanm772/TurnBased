@@ -5,6 +5,9 @@ using CodeMonkey.Utils;
 
 public class CharacterBattle : MonoBehaviour
 {
+
+
+    [SerializeField] private Transform pfAbilityButtonManager;
     private CharacterBase characterBase;
     private State state;
     private Vector3 slideTargetPosition;
@@ -30,6 +33,12 @@ public class CharacterBattle : MonoBehaviour
         state = State.Idle;
     }
 
+    private void Start()
+    {
+        Transform abilityButtonManagerTransform = Instantiate(pfAbilityButtonManager, Vector3.zero, Quaternion.identity);
+        // Optionally, parent to Canvas:
+        abilityButtonManagerTransform.SetParent(GameObject.Find("Canvas").transform, false);
+    }
     private void Update()
     {
         switch(state)

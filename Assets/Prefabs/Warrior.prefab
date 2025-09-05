@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 372e47c2760241a4da9fd54f08ae5eef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pfAbilityButtonManager: {fileID: 2238621133591599477, guid: 21d00d484fab5314a998ea04233a48bd, type: 3}
 --- !u!114 &3352385786731373045
 MonoBehaviour:
   m_ObjectHideFlags: 0

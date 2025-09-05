@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17769f0f511d19340a16dbaa49f5432d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1000
+  health: 100
   melee: 10
   defense: 5
   experience: 0
