@@ -35,9 +35,13 @@ public class CharacterBattle : MonoBehaviour
 
     private void Start()
     {
-        Transform abilityButtonManagerTransform = Instantiate(pfAbilityButtonManager, Vector3.zero, Quaternion.identity);
-        // Optionally, parent to Canvas:
-        abilityButtonManagerTransform.SetParent(GameObject.Find("Canvas").transform, false);
+        if( isPlayerTeam)
+        {
+            Transform abilityButtonManagerTransform = Instantiate(pfAbilityButtonManager, Vector3.zero, Quaternion.identity);
+
+            // Optionally, parent to Canvas:
+            abilityButtonManagerTransform.SetParent(GameObject.Find("Canvas").transform, false);
+        }
     }
     private void Update()
     {
@@ -71,7 +75,7 @@ public class CharacterBattle : MonoBehaviour
     {
         this.isPlayerTeam = isPlayerTeam;
         characterBase.SetDefaultFacingRight(isPlayerTeam);
-        healthSystem = new HealthSystem(GameAssets.i.pfFighterStatsPrefab.GetComponent<FighterStats>().health);
+        healthSystem = new HealthSystem(gameObject.GetComponent<FighterStats>().health);
         // Transform healthBarTransform = Instantiate(pfHealthBar, new Vector3(characterBase.transform.position.x - 1, -0.5f), Quaternion.identity);
         //healthBar = healthBarTransform.GetComponent<HealthBar>();
         //healthBar.Setup(healthSystem);
@@ -97,12 +101,12 @@ public class CharacterBattle : MonoBehaviour
         }
     }
 
-    public void Damage(int damageAmount)
+    public void Damage(int damageAmount, bool isCritical)
     {
         healthSystem.Damage(damageAmount);
         //CodeMonkey.CMDebug.TextPopup("Hit " + healthSystem.GetHealthAmount(), GetPosition());
         //Debug.Log(name + " took damage, current health: " + healthSystem.GetHealthAmount());
-        DamagePopUp.Create(GetPosition(), damageAmount, false);
+        DamagePopUp.Create(GetPosition(), damageAmount, isCritical);
         characterBase.SetColorTint(new Color(1, 0, 0, 1f));
 
         // Applies screen shake effect
@@ -141,10 +145,11 @@ public class CharacterBattle : MonoBehaviour
             Vector3 attackDir = (targetCharacterBattle.GetPosition() - GetPosition()).normalized;
             characterBase.PlayAnimAttack(attackDir, abilityName, () =>
             {
-                int dmageAmount = UnityEngine.Random.Range(30,40);
+                bool isCriticalHit = AttackScript.isCritical(characterBase.GetComponent<FighterStats>());
+                int dmageAmount = AttackScript.CalculateDamage(characterBase.GetComponent<FighterStats>(), targetCharacterBattle.GetComponent<FighterStats>(), abilityName, isCriticalHit);
                 // Target Hit
                 Debug.Log(name + " attacked " + targetCharacterBattle.name);
-                targetCharacterBattle.Damage(dmageAmount);
+                targetCharacterBattle.Damage(dmageAmount, isCriticalHit);
             },
                 () => {
                     // Attack completed, slide back

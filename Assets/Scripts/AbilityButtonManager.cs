@@ -1,3 +1,12 @@
+
+/**
+ * IMPLEMENT THE DAMAGE SYSTEM ALONG WITH THE ATTACK SCRIPT!!!!
+ * 
+ * 
+ * 
+*/
+
+
 using UnityEngine;
 
 public class AbilityButtonManager : MonoBehaviour

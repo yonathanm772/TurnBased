@@ -170,6 +170,7 @@ MonoBehaviour:
   melee: 10
   defense: 5
   experience: 0
+  criticalChance: 10
 --- !u!1 &2657424311043781204
 GameObject:
   m_ObjectHideFlags: 0

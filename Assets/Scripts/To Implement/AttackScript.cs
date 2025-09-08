@@ -2,27 +2,66 @@ using UnityEngine;
 
 public class AttackScript : MonoBehaviour
 {
-    // the game object holding the script
-    public GameObject owner;
 
-    [SerializeField] private string animationName;
+    public static int CalculateDamage(FighterStats attacker, FighterStats defender, string abilityName, bool isCritical)
+    {
+        if (attacker == null || defender == null)
+        {
+            Debug.LogError("Null FighterStats passed to CalculateDamage!");
+            return 0;
+        }
 
-    // if the user has a magic attack (it could be melee or ranged), its true, and it costs magic points
-    //[SerializeField] private bool magicAttack;
-    //[SerializeField] private float magicCost;
+        Debug.Log($"Calculating damage for ability: {abilityName} from attacker: {attacker.name} to defender: {defender.name}");
+        // Example logic, expand as needed for abilities
+        float minAttackMultiplier = 1f;
+        float maxAttackMultiplier = 2f;
+        float minDefenseMultiplier = 0.5f;
+        float maxDefenseMultiplier = 1f;
 
-    // multipliers to add fun to the game
-    [SerializeField] private float minAttackMultiplier;
-    [SerializeField] private float maxAttackMultiplier;
+        switch (abilityName)
+        {
+            case "Ability0":
+                minAttackMultiplier = 1f;
+                maxAttackMultiplier = 1.5f;
+                minDefenseMultiplier = 0.5f;
+                maxDefenseMultiplier = 1f;
+                break;
+            case "Ability1":
+                minAttackMultiplier = 1.5f;
+                maxAttackMultiplier = 2f;
+                minDefenseMultiplier = 0.3f;
+                maxDefenseMultiplier = 0.8f;
+                break;
+            default:
+                Debug.LogWarning($"Unknown ability name: {abilityName}. Using default multipliers.");
+                break;
+        }
 
-    // multipliers to add fun to the game
-    [SerializeField] private float minDefenseMultiplier;
-    [SerializeField] private float maxDefenseMultiplier;
+        float attackMultiplier = UnityEngine.Random.Range(minAttackMultiplier, maxAttackMultiplier);
+        float defenseMultiplier = UnityEngine.Random.Range(minDefenseMultiplier, maxDefenseMultiplier);
 
-    private FighterStats attackerStats;
-    private FighterStats targetStats;
-    private float damage = 0.0f;
-    
+        float rawDamage = attackMultiplier * attacker.melee;
+        float mitigatedDamage = Mathf.Max(0, rawDamage - (defenseMultiplier * defender.defense));
+
+        if (isCritical)
+        {
+            mitigatedDamage *= 1.5f; // Critical hits deal 50% more damage
+        }
+
+        return Mathf.CeilToInt(mitigatedDamage);
+    }
+
+    public static bool isCritical(FighterStats attacker)
+    {
+        if (attacker == null)
+        {
+            Debug.LogError("Null FighterStats passed to isCritical!");
+            return false;
+        }
+        int roll = UnityEngine.Random.Range(0, 100);
+        return roll < attacker.criticalChance;
+    }
+
     /*public void Attack(GameObject victim)
     {
         

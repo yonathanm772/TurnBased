@@ -16,6 +16,7 @@ public class FighterStats : MonoBehaviour
     public int melee;
     public int defense;
     public int experience;
+    public int criticalChance;
 
 
     /*public float magic;
